@@ -1,0 +1,15 @@
+{
+  "name": "maaow",
+  "version": "1.0.0",
+  "description": "maaow",
+  "main": "web.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node web.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "webpagetest": "^0.3.9"
+  }
+}
