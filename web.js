@@ -32,13 +32,13 @@ wpt.runTest(urlPageUnderTest, options, (err, result) => {
 
 
 // 2nd tool - GTMetrix
-const locationParam = 2; //1-Vancouver, 2-London, 3-Sydney, 4-Dallas, 5-Mumbay, 6-Sao Paulo, 7-Hong Kong
 const gtmetrix = require('gtmetrix')({
     email: 'valadin96@gmail.com',
     apikey: '245330406ecb8c5e54e8348bd6420277',
     timeout: 10000
 });
 const fs = require('fs');
+const locationParam = 2; //1-Vancouver, 2-London, 3-Sydney, 4-Dallas, 5-Mumbay, 6-Sao Paulo, 7-Hong Kong
 
 function getDateString() {
     const date = new Date();
@@ -50,16 +50,24 @@ function getDateString() {
     return `${year}-${month}-${day}_${hour}-${min}`
 }
 
+function runGTMetrix(page, locationNumber) {
+    const test = {
+        url: page,
+        location: locationNumber,
+        browser: 3
+    }
 
-const test = {
-    url: urlPageUnderTest,
-    location: locationParam, 
-    browser: 3
+    gtmetrix.test.create(test).then(data => {
+        gtmetrix.test.get(data.test_id, 5000, console.log);
+        gtmetrix.test.get(data.test_id, 5000).then(data =>
+            fs.writeFile(__dirname + `/result_${getDateString()}_loc_${locationParam}.json`, JSON.stringify(data), console.log));
+    })
 }
 
-gtmetrix.test.create(test).then(data => {
-    gtmetrix.test.get(data.test_id, 5000, console.log);
-    gtmetrix.test.get(data.test_id, 5000).then(data =>
-        fs.writeFile(__dirname + `/result_${getDateString()}_loc_${locationParam}.json`, JSON.stringify(data), console.log));
-})
+runGTMetrix(urlPageUnderTest, locationParam);
+
+
+
+
+
 
