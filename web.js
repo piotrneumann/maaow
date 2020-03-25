@@ -3,35 +3,35 @@ const wpt = new WebPageTest("www.webpagetest.org");
 const fs = require('fs');
 
 const gtmetrix = require('gtmetrix')({
-    email: 'valadin96@gmail.com',
-    apikey: '245330406ecb8c5e54e8348bd6420277',
+    email: 'valadin096@gmail.com',
+    apikey: '4af0304206182860bd7fda9fb6b79299',
     timeout: 10000
 });
 
 const urlPageUnderTest = ["https://przyprawytobago.pl", "https://www.x-kom.pl", "https://www.amazon.com"];
 const locationParam1 = [
-    // {
-    //     id: 2,
-    //     loc: "London",
-    //     name: "London_EC2"
-    // },
-    // {
-    //     id: 3,
-    //     loc: "Sydney",
-    //     name: "ec2-ap-southeast-2"
-    // },
+    {
+        id: 2,
+        loc: "London",
+        name: "London_EC2"
+    },
+    {
+        id: 3,
+        loc: "Sydney",
+        name: "ec2-ap-southeast-2"
+    }, 
     {
         id: 6,
         loc: "Sao Paulo",
         name: "ec2-sa-east-1"
-    }
+    } 
 ];
 //1-Vancouver, 2-London, 3-Sydney, 4-Dallas, 5-Mumbay, 6-Sao Paulo, 7-Hong Kong
 
 
 for (let i = 0; i < urlPageUnderTest.length; i++) {
     for (let j = 0; j < locationParam1.length; j++) {
-        // runGTMetrix(urlPageUnderTest[i], locationParam1[j]);
+       runGTMetrix(urlPageUnderTest[i], locationParam1[j]);
         runWebPageTest(urlPageUnderTest[i], locationParam1[j]);
     }
 }
